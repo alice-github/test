@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{padding:0;margin:0;}
+	#div1{width:100px;height:100px;position:absolute;left:200px;top:200px;background:#faa;cursor:hand;}
+	#div2{width:300px;height:300px;background:#00f;}
+</style>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+	<script>
+		var div1=document.getElementById('div1');
+		var div1Width = div1.offsetWidth;
+		var div1Height = div1.offsetHeight;
+
+		div1.onmousedown = function(ev){
+			div1.style.border = '3px solid #ccc';
+			var div1Left = div1.offsetLeft;
+			var div1Top = div1.offsetTop;
+			var disX = ev.clientX-div1Left;
+			var disY = ev.clientY-div1Top;
+			//alert(disX + ':'+disY);
+			document.onmousemove = function(ev){
+				console.log(1);
+				var left = ev.clientX -disX;
+				var top = ev.clientY-disY;
+				div1.style.left = left + 'px';
+				div1.style.top = top + 'px';
+
+			};
+			document.onmouseup = function(ev){
+				div1.style.border = '0';
+				document.onmousedown = null;
+				document.onmousemove = null;
+			};
+		};
+	</script>
+</body>
+</html>
